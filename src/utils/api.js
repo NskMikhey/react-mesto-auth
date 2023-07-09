@@ -13,7 +13,7 @@ class Api {
     }
 
     // РАБОТА С ДАННЫМИ ПОЛЬЗОВАТЕЛЯ
-    //Получает инфо о пользователе с сервера
+    //Получает информацию о пользователе с сервера
     getUserData() {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'GET',
@@ -89,3 +89,6 @@ export const api = new Api({
     },
 })
 
+// Адрес сервера авторизации
+
+export const BASE_URL = "https://auth.nomoreparties.co";

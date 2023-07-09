@@ -9,6 +9,7 @@ import { api } from "../utils/api";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
+import InfoTooltip from "./InfoTooltip";
 
 function App() {
 
@@ -38,6 +39,12 @@ function App() {
   // Состояние Popup удаления карточки
   const [deletePlacePopupOpen, setDeletePlacePopupOpen] =
     React.useState(false);
+
+  /** Состояние всплывашки Tooltip карточки */
+  const [infoTooltipOpen, setInfoTooltipOpen] = useState(false);
+
+  /** Тип всплывашки Tooltip карточки */
+  const [infoTooltipType, setInfoTooltipType] = useState("error");
 
   // Состояние выбранной для удаления карточки 
   const [deleteCard, setDeleteCard] = React.useState({ _id: "" });
@@ -69,6 +76,11 @@ function App() {
     setDeleteCard(card);
   }
 
+  /** Открывает всплывашку Tooltip */
+  function handleInfoTooltipPopupOpen() {
+    setInfoTooltipOpen(true);
+}
+
   // Закрывает все Popup 
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
@@ -77,25 +89,8 @@ function App() {
     setSelectedCard({ name: "", link: "" });
     setDeletePlacePopupOpen(false);
     setDeleteCard({ _id: "" });
+    setInfoTooltipOpen(false);
   }
-
-  // Закрытие по оверлею
-  function handleOverlayClose(evt) {
-    if (evt.target.classList.contains("popup")) {
-      closeAllPopups();
-    }
-  }
-
-  // Закрытие по ESC 
-  useEffect(() => {
-    const closeByEsc = (evt) => {
-      if (evt.key === "Escape") {
-        closeAllPopups();
-      }
-    };
-    document.addEventListener("keydown", closeByEsc);
-    return () => document.removeEventListener("keydown", closeByEsc);
-  }, []);
 
   // Ставит/удаляет лайк
   function handleCardLike(card) {
@@ -201,7 +196,6 @@ function App() {
           onUpdateUser={handleUpdateUser}
           isLoading={isLoading}
           loadingText="Сохранение..."
-          onOverlayClose={handleOverlayClose}
         />
 
         {/* New place popup */}
@@ -211,7 +205,6 @@ function App() {
           onAddPlace={handleAddPlaceSubmit}
           isLoading={isLoading}
           loadingText="Добавление..."
-          onOverlayClose={handleOverlayClose}
         >
         </AddPlacePopup>
 
@@ -219,7 +212,6 @@ function App() {
         <EditAvatarPopup
           popupOpen={updateAvatarPopupOpen}
           onClose={closeAllPopups}
-          onOverlayClose={handleOverlayClose}
           onUpdateAvatar={handleUpdateAvatar}
           isLoading={isLoading}
           loadingText="Сохранение..."
@@ -233,7 +225,6 @@ function App() {
           submitButtonText="Да"
           popupOpen={deletePlacePopupOpen}
           onClose={closeAllPopups}
-          onOverlayClose={handleOverlayClose}
           onSubmit={handleCardDelete}
           isLoading={isLoading}
           loadingText="Удаление..."
@@ -244,7 +235,11 @@ function App() {
           popupOpen={updateAvatarPopupOpen}
           card={selectedCard}
           onClose={closeAllPopups}
-          onOverlayClose={handleOverlayClose}
+        />
+        <InfoTooltip
+          popupOpen={infoTooltipOpen}
+          onClose={closeAllPopups}
+          type={infoTooltipType}
         />
       </div>
     </CurrentUserContext.Provider>

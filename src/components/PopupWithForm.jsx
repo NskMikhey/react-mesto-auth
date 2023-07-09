@@ -1,11 +1,14 @@
 import React from "react";
+import Popup from "./Popup";
 
 const PopupWithForm = (props) => {
     return (
-        <div className={[
-            props.popupOpen ? "popup popup_is-opened " : "popup", `popup_${props.popupType}`
-        ].join(' ')}
-            onClick={props.onOverlayClose}
+        <Popup
+            className={[
+                props.popupOpen ? "popup popup_is-opened" : "popup",
+                `popup_${props.popupType}`,
+            ].join(" ")}
+            closeHandler={props.onClose}
         >
             <div className={[
                 "popup__container", `popup__container_${props.popupType}`
@@ -19,7 +22,8 @@ const PopupWithForm = (props) => {
                     "popup__form", `popup__form_${props.popupType}`
                 ].join(' ')}
                     name={props.popupFormName}
-                    onSubmit={props.onSubmit}>
+                    onSubmit={props.onSubmit}
+                    noValidate>
 
                     {props.children}
                     <button className={["popup__submit", `popup__submit_${props.popupType}`, props.isValid ? '' : "popup__submit_disabled"
@@ -30,7 +34,7 @@ const PopupWithForm = (props) => {
                     </button>
                 </form>
             </div>
-        </div>
+        </Popup >
     );
 };
 PopupWithForm.defaultProps = { isValid: true };

@@ -2,7 +2,7 @@
 
 #### Проектная работа Mesto-React
 ###### Ссылка на курс - https://practicum.yandex.ru/web/
-###### Cсылка на GitHub - https://nskmikhey.github.io/mesto-react
+###### Cсылка на GitHub - https://github.com/NskMikhey/react-mesto-auth.git
 
 Проектная работа по итогам прохождения первых 12 спринтов на курсе по Веб-разработке.
 

@@ -41,8 +41,8 @@ const Main = (props) => {
                             card={data}
                             key={data._id}
                             onCardClick={props.onCardClick} // нажатие на карточку
-                            onDeleteCard={props.onDeleteCard}
-                            onCardLike={props.onCardLike}
+                            onDeleteCard={props.onDeleteCard} // удаление
+                            onCardLike={props.onCardLike} //лайк
                         />)
                 })
                 }
