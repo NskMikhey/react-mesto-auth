@@ -1,10 +1,10 @@
 import React from "react";
-import {Redirect, Route} from "react-router-dom";
+import {Navigate, Route} from "react-router-dom";
 
 const ProtectedRoute = ({loggedIn, children, path, exact}) => {
     return (
         <Route exact path={path}>
-            {loggedIn ? children : <Redirect to="/sign-in"/>}
+            {loggedIn ? children : <Navigate to="/sign-in"/>}
         </Route>
     )
 }

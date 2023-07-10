@@ -9,9 +9,17 @@ import { api } from "../utils/api";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
-import InfoTooltip from "./InfoTooltip";
+// import InfoTooltip from "./InfoTooltip";
+// import {Navigate, Route, Routes, useNavigate } from "react-router-dom";
+// import ProtectedRoute from "./ProtectedRoute";
+// import InfoTooltip from "./InfoTooltip";
+// import Login from "./Login";
+// import Register from "./Register";
+// import * as auth from "../utils/auth";
 
 function App() {
+
+
 
   // Состояние контекста пользователя 
   const [currentUser, setCurrentUser] = useState({});
@@ -39,12 +47,6 @@ function App() {
   // Состояние Popup удаления карточки
   const [deletePlacePopupOpen, setDeletePlacePopupOpen] =
     React.useState(false);
-
-  /** Состояние всплывашки Tooltip карточки */
-  const [infoTooltipOpen, setInfoTooltipOpen] = useState(false);
-
-  /** Тип всплывашки Tooltip карточки */
-  const [infoTooltipType, setInfoTooltipType] = useState("error");
 
   // Состояние выбранной для удаления карточки 
   const [deleteCard, setDeleteCard] = React.useState({ _id: "" });
@@ -76,11 +78,6 @@ function App() {
     setDeleteCard(card);
   }
 
-  /** Открывает всплывашку Tooltip */
-  function handleInfoTooltipPopupOpen() {
-    setInfoTooltipOpen(true);
-}
-
   // Закрывает все Popup 
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
@@ -89,7 +86,7 @@ function App() {
     setSelectedCard({ name: "", link: "" });
     setDeletePlacePopupOpen(false);
     setDeleteCard({ _id: "" });
-    setInfoTooltipOpen(false);
+    // setInfoTooltipOpen(false);
   }
 
   // Ставит/удаляет лайк
@@ -236,11 +233,11 @@ function App() {
           card={selectedCard}
           onClose={closeAllPopups}
         />
-        <InfoTooltip
+        {/* <InfoTooltip
           popupOpen={infoTooltipOpen}
           onClose={closeAllPopups}
           type={infoTooltipType}
-        />
+        /> */}
       </div>
     </CurrentUserContext.Provider>
   );
