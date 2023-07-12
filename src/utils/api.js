@@ -78,6 +78,10 @@ class Api {
             headers: this._headers,
         }).then(this._handlePromiseReturn)
     }
+
+    getAllData() {
+        return Promise.all([this.getUserData(), this.getInitialCards()]);
+    }
 }
 
 //Экземпляр API

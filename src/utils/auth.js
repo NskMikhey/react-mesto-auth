@@ -1,4 +1,4 @@
-import {BASE_URL} from "./api";
+import { BASE_URL } from "./api";
 
 /** Объект с ошибками сервера
  * @type {{"400": string, "401": string}}
@@ -64,16 +64,15 @@ export const authorize = (loginData) => {
         .then((res) => handleAuthResponse(res))
 }
 
-/** Получает email по токену, проверка валидности токена
- * @param token - jwt-токен
- * @returns {Promise<any>}
- */
-export const getContent = (token) => {
+//Запрос для проверки валидности токена и получения email для вставки в шапку сайта
+export const tokenCheck = (token) => {
+    //console.log(token)
     return fetch(`${BASE_URL}/users/me`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
         }
     })
         .then((res) => handleRegResponse(res))
