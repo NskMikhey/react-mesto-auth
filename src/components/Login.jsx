@@ -12,7 +12,7 @@ const Login = (props) => {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        props.handleLogin(loginData);
+        props.authorization(loginData);
     };
 
     return (

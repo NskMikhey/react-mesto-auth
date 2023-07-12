@@ -303,7 +303,7 @@ function App() {
             element={
               <ProtectedRoute
                 // isLoggedIn={loggedIn}
-                // checkToken={tokenCheck}
+                checkToken={tokenCheck}
                 element={Main}
                 onEditProfile={handleEditProfileClick} // редактирование профиля
                 onNewPlace={handleNewPlaceClick} // добавление карточки
@@ -317,14 +317,14 @@ function App() {
             }
           />
           <Route
-            path="/sign-up"
+            path="/sign-in"
             element={
               <Register
                 registration={registration}
               />
             }
           />
-          <Route path="/sign-in"
+          <Route path="/sign-up"
             element={
               <Login authorization={authorization}
               />

@@ -66,8 +66,7 @@ export const authorize = (loginData) => {
 
 //Запрос для проверки валидности токена и получения email для вставки в шапку сайта
 export const tokenCheck = (token) => {
-    //console.log(token)
-    return fetch(`${BASE_URL}/users/me`, {
+        return fetch(`${BASE_URL}/users/me`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',

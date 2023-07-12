@@ -14,7 +14,7 @@ const Register = (props) => {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        props.handleRegister(loginData);
+        props.registration(loginData);
     };
 
     return (<div className="form form_registration">
