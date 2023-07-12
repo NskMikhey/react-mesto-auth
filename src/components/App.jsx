@@ -226,9 +226,9 @@ function App() {
     Auth.authorize(loginData)
       .then((res) => {
         setLoggedIn(true);
-        localStorage.setItem("jwt", res.token);
+        localStorage.setItem('token', res.token);
         setEmail(loginData.email);
-        navigate('/');
+        navigate('/', { replace: true });
       })
       .catch((err) => {
         handleInfoTooltipPopupOpen();
@@ -240,7 +240,7 @@ function App() {
 
   /** Получает email по токену, проверка валидности токена */
   const tokenCheck = () => {
-    const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem('token');
     if (token) {
       Auth.tokenCheck(token)
         .then((res) => {
@@ -255,7 +255,7 @@ function App() {
 
   /** Выход из приложения. Удаление токена */
   function signOut() {
-    localStorage.removeItem('jwt');
+    localStorage.removeItem('token');
     navigate('/sign-up');
     setLoggedIn(false);
   }
@@ -290,19 +290,22 @@ function App() {
   }, [loggedIn]);
 
 
-  
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page_wrapper">
 
-        <Header loggedIn={loggedIn} email={email} signOut={signOut} />
+        <Header
+          loggedIn={loggedIn}
+          email={email}
+          signOut={signOut} />
         <Routes >
           <Route
             path="/"
             element={
               <ProtectedRoute
-                // isLoggedIn={loggedIn}
+                isLoggedIn={loggedIn}
                 checkToken={tokenCheck}
                 element={Main}
                 onEditProfile={handleEditProfileClick} // редактирование профиля
@@ -317,14 +320,14 @@ function App() {
             }
           />
           <Route
-            path="/sign-in"
+            path="/sign-up"
             element={
               <Register
                 registration={registration}
               />
             }
           />
-          <Route path="/sign-up"
+          <Route path="/sign-in"
             element={
               <Login authorization={authorization}
               />
