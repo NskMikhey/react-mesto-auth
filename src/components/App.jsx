@@ -191,17 +191,8 @@ function App() {
       });
   }
 
-  // // //Получение данных пользователя, массива карточек
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     Promise.all([api.getUserData(), api.getInitialCards()])
-  //       .then(([dataUser, dataCard]) => {
-  //         setCurrentUser(dataUser);
-  //         setCards(dataCard);
-  //       })
-  //       .catch((err) => console.error(`Ошибка при загрузке данных с сервера ${err}`))
-  //   }
-  // }, [loggedIn]);
+
+
 
 
   // Регистрация
@@ -339,6 +330,12 @@ function App() {
               loggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />
             }
           />
+          {/* <Route
+            path="*"
+            element={
+               <Navigate to="/" /> 
+            }
+          /> */}
         </Routes>
         <Footer />
 

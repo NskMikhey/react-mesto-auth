@@ -12,7 +12,7 @@
     }
 }
 
-@media screen and (max-width: 740px) {
+@media screen and (max-width: 767px) {
     .form {
         margin-top: 40px;
         height: calc(100% - 84px - 100px - 40px);

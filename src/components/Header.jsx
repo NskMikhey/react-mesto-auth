@@ -7,11 +7,11 @@ const Header = (props) => {
     const location = useLocation();
 
     /** Стейт видимости кнопки меню на маленьких разрешениях */
-    const [menuButtonActive, setMenuButtonActive] = React.useState(false);
+    const [menuBurgerActive, setMenuBurgerActive] = React.useState(false);
 
     /** Открывалка меню */
     function handleOpenMenu() {
-        setMenuButtonActive(!menuButtonActive);
+        setMenuBurgerActive(!menuBurgerActive);
     }
 
     return (
@@ -23,7 +23,7 @@ const Header = (props) => {
                     </a>
                     {props.loggedIn && (
                         <button
-                            className={menuButtonActive ? "header__menu-button header__menu-button_active button" : "header__menu-button button"}
+                            className={menuBurgerActive ? "header__menu-burger header__menu-burger button-hover" : "header__menu-burger button-hover"}
                             type="button"
                             aria-label="Меню"
                             onClick={handleOpenMenu}
@@ -32,19 +32,19 @@ const Header = (props) => {
                     {!props.loggedIn && (
                         <>
                             {location.pathname === '/sign-up' &&
-                                <Link to="/sign-in" className="header__button button">Войти</Link>
+                                <Link to="/sign-in" className="header__button button-hover">Войти</Link>
                             }
                             {location.pathname === '/sign-in' &&
-                                <Link to="/sign-up" className="header__button button">Регистрация</Link>
+                                <Link to="/sign-up" className="header__button button-hover">Регистрация</Link>
                             }
                         </>
                     )}
                 </div>
                 {props.loggedIn && (
-                    <div className={menuButtonActive ? "header__menu header__menu_open" : "header__menu"}>
+                    <div className={menuBurgerActive ? "header__menu header__menu_open" : "header__menu"}>
                         <p className="header__email">{props.email}</p>
                         { /* eslint-disable-next-line */}
-                        <a onClick={props.signOut} className="header__button header__button-logout button">
+                        <a onClick={props.signOut} className="header__button header__button-logout button-hover">
                             Выйти
                         </a>
                     </div>

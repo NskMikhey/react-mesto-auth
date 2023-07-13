@@ -8,7 +8,7 @@
     color: #FFFFFF;
 }
 
-@media screen and (max-width: 740px) {
+@media screen and (max-width: 767px) {
     .header__button {
         margin-right: 10px;
     }
