@@ -21,24 +21,20 @@ function App() {
   // Состояние пользователя — вошёл он в систему или нет
   const [loggedIn, setLoggedIn] = useState(false);
 
-  /** История переходов страниц */
+  // История переходов страниц
   const navigate = useNavigate();
 
-  /** Состояние Email пользователя, для шапки */
+  // Состояние для получения email пользователя в шапке
   const [email, setEmail] = useState("");
 
-  /** Стейт состояния получения данных пользователя и карточек */
+  // Состояние состояния получения данных пользователя и карточек 
   const [isLoadingAllData, setIsLoadingAllData] = useState(false);
 
-  /** Состояние всплывашки Tooltip карточки */
+  // Состояние Popup Tooltip карточки 
   const [infoTooltipOpen, setInfoTooltipOpen] = useState(false);
 
-  /** Тип всплывашки Tooltip карточки */
+  // Тип Popup Tooltip карточки 
   const [infoTooltipType, setInfoTooltipType] = useState("error");
-
-
-
-
 
   // Состояние контекста пользователя 
   const [currentUser, setCurrentUser] = useState({});
@@ -97,19 +93,12 @@ function App() {
     setDeleteCard(card);
   }
 
-
-
-
-  /** Открывает всплывашку Tooltip */
+  // Открывает Popup Tooltip 
   function handleInfoTooltipPopupOpen() {
     setInfoTooltipOpen(true);
   }
 
-
-
-
-
-  // Закрывает все Popup 
+  // Закрывает все Popups 
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
     setNewPlacePopupOpen(false);
@@ -191,10 +180,6 @@ function App() {
       });
   }
 
-
-
-
-
   // Регистрация
   function registration(registerData) {
     Auth.register(registerData)
@@ -212,7 +197,7 @@ function App() {
       });
   }
 
-  //Вход, запись полученного токена
+  // Вход, запись полученного токена
   function authorization(loginData) {
     Auth.authorize(loginData)
       .then((res) => {
@@ -229,7 +214,7 @@ function App() {
       })
   }
 
-  /** Получает email по токену, проверка валидности токена */
+  // Получает email по токену, проверка валидности токена 
   const tokenCheck = () => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -244,26 +229,26 @@ function App() {
     }
   }
 
-  /** Выход из приложения. Удаление токена */
+  // Выход, удаление токена 
   function signOut() {
     localStorage.removeItem('token');
     navigate('/sign-up');
     setLoggedIn(false);
   }
 
-  /** Перенаправление на главную для зарег. пользователя и на login для незарег. пользователя */
+  // Перенаправление на главную для зарег. пользователя и на login для незарег. пользователя 
   useEffect(() => {
     loggedIn ? navigate("/") : navigate("/sign-in")
     // eslint-disable-next-line
   }, [loggedIn]);
 
-  /** Проверка токена, получение email */
+  // Проверка токена, получение email 
   useEffect(() => {
     tokenCheck();
   }, []);
 
-  /** Получаем данные залогиненного пользователя, пишем в состояние currentUser */
-  /** Получаем массив карточек, пишем в состояние cards */
+  // Получает данные залогиненного пользователя
+  // Получает массив карточек
   useEffect(() => {
     if (loggedIn) {
       setIsLoadingAllData(true);
@@ -279,9 +264,6 @@ function App() {
         })
     }
   }, [loggedIn]);
-
-
-
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -330,12 +312,6 @@ function App() {
               loggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />
             }
           />
-          {/* <Route
-            path="*"
-            element={
-               <Navigate to="/" /> 
-            }
-          /> */}
         </Routes>
         <Footer />
 

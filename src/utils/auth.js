@@ -1,17 +1,12 @@
 import { BASE_URL } from "./api";
 
-/** Объект с ошибками сервера
- * @type {{"400": string, "401": string}}
- */
+// Объект с ошибками сервера
 const SERVER_ERRORS = {
     400: "Одно из полей не заполнено или не прошло валидацию.",
     401: "Пользователь с введенным email не найден."
 }
 
-/** Хандл проверки ответа при регистрации, возвращает ответ или ошибку
- * @param res - ответ
- * @returns {*}
- */
+// проверка ответа от сервера
 const handleRegResponse = (res) => {
     if (res.status !== 400) {
         return res.json();
@@ -20,10 +15,6 @@ const handleRegResponse = (res) => {
     }
 }
 
-/** Хандл проверки ответа при авторизации, возвращает ответ или ошибку
- * @param res - ответ
- * @returns {*}
- */
 const handleAuthResponse = (res) => {
     if (res.status === 400 || res.status === 401) {
         throw new Error(SERVER_ERRORS[res.status]);
@@ -32,10 +23,7 @@ const handleAuthResponse = (res) => {
     }
 }
 
-/** Отправка рег. данных
- * @param registerData - рег. данные {email: string, password: string}
- * @returns {Promise<Response>}
- */
+// Отправка рег. данных
 export const register = (registerData) => {
     return fetch(`${BASE_URL}/signup`, {
         method: "POST",
@@ -48,10 +36,8 @@ export const register = (registerData) => {
         .then((res) => handleRegResponse(res))
 }
 
-/** Отправка данных входа
- * @param loginData - данные входа {email: string, password: string}
- * @returns {Promise<Response>}
- */
+// функция, которая будет проверять логин и пароль пользователя
+// на соответствие какому-либо профилю, хранящемуся в базе данных
 export const authorize = (loginData) => {
     return fetch(`${BASE_URL}/signin`, {
         method: "POST",
@@ -64,7 +50,7 @@ export const authorize = (loginData) => {
         .then((res) => handleAuthResponse(res))
 }
 
-//Запрос для проверки валидности токена и получения email для вставки в шапку сайта
+// Запрос для проверки валидности токена и получения email для вставки в шапку сайта
 export const tokenCheck = (token) => {
         return fetch(`${BASE_URL}/users/me`, {
         method: 'GET',

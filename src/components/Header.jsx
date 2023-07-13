@@ -6,10 +6,9 @@ const Header = (props) => {
 
     const location = useLocation();
 
-    /** Стейт видимости кнопки меню на маленьких разрешениях */
     const [menuBurgerActive, setMenuBurgerActive] = React.useState(false);
 
-    /** Открывалка меню */
+    // Бургер меню
     function handleOpenMenu() {
         setMenuBurgerActive(!menuBurgerActive);
     }
@@ -19,11 +18,12 @@ const Header = (props) => {
             <nav className="header__nav">
                 <div className="header__nav-wrapper">
                     <a className="header__link" href="/" title="Mesto Russia">
-                        <img className="header__logo" src={headerLogo} alt="Логотип Место"/>
+                        <img className="header__logo" src={headerLogo} alt="Логотип Место" />
                     </a>
                     {props.loggedIn && (
                         <button
-                            className={menuBurgerActive ? "header__menu-burger header__menu-burger button-hover" : "header__menu-burger button-hover"}
+                            className={menuBurgerActive ?
+                                "header__menu-burger header__menu-burger button-hover" : "header__menu-burger button-hover"}
                             type="button"
                             aria-label="Меню"
                             onClick={handleOpenMenu}
