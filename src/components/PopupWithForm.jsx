@@ -8,7 +8,7 @@ const PopupWithForm = (props) => {
                 props.popupOpen ? "popup popup_is-opened" : "popup",
                 `popup_${props.popupType}`,
             ].join(" ")}
-            isOpen={props.isOpen}
+            isOpen={true}
             closeHandler={props.onClose}
         >
             <div className={[

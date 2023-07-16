@@ -6,8 +6,8 @@ const ImagePopup = (props) => {
 
     return (
         <Popup className={link !== '' ? "popup popup_is-opened image-popup" : "popup image-popup"}
+            isOpen={true}
             aria-label="попап зума"
-            isOpen={props.isOpen}
             closeHandler={props.onClose}
         >
             <div className="popup__image-container" aria-label="зум карточки">

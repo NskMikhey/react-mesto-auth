@@ -19,14 +19,14 @@ const Popup = (props) => {
     };
 
     useEffect(() => {
-        document.addEventListener("click", handleOverlayClose, false);
-        document.addEventListener("keydown", closeByEsc, false);
+        if (isOpen) {
+            document.addEventListener("click", handleOverlayClose, false);
+            document.addEventListener("keydown", closeByEsc, false);
+        }
 
         return () => {
-            if (isOpen) {
-                document.removeEventListener("click", handleOverlayClose, false);
-                document.removeEventListener("keydown", closeByEsc, false);
-            }
+            document.removeEventListener("click", handleOverlayClose, false);
+            document.removeEventListener("keydown", closeByEsc, false);
         };
         //eslint-disable-next-line
     }, [isOpen, closeHandler]);

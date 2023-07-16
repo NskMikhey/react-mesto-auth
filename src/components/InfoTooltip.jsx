@@ -12,7 +12,7 @@ const InfoTooltip = (props) => {
     return (
         <Popup
             className={props.popupOpen ? "popup popup_is-opened" : "popup"}
-            isOpen={props.isOpen}
+            isOpen={true}
             closeHandler={props.onClose}
         >
             <div
