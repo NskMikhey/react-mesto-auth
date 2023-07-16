@@ -1,5 +1,4 @@
-import React from 'react';
-import PopupWithForm from "./PopupWithForm";
+import React from 'react'; import PopupWithForm from "./PopupWithForm";
 
 const EditAvatarPopup = (props) => {
 
@@ -11,38 +10,33 @@ const EditAvatarPopup = (props) => {
     const [formValidationMessages, setFormValidationMessages] = React.useState({ name: "", about: "" });
     const [formValid, setFormValid] = React.useState(true);
 
-    const refAvatar = React.useRef('');
-
-    // Изменяет стейт аватара
-    function handleInputChange(evt) {
+    const handleInputChange = (evt) => {
         const { name, value } = evt.target;
         setAvatar({
             ...avatar,
             [name]: value
         })
-        handleInputValid(refAvatar);
+        handleInputValid(evt);
     }
 
-    function handleSubmit(evt) {
+    const handleSubmit = (evt) => {
         evt.preventDefault();
         props.onUpdateAvatar({
-            avatar: refAvatar.current.value
+            avatar: avatar.avatar
         })
         setFormValid(false);
     }
 
-    // Закрытие и сброс
-    function handleOnClose() {
+    const handleOnClose = () => {
         props.onClose();
         setFormInputsValid({ avatar: false });
         setFormValid(false);
     }
 
-    // Обрабатывает валидацию ввода события
-    const handleInputValid = (input) => {
-        const { name } = input.current;
+    const handleInputValid = (evt) => {
+        const { name } = evt.target;
 
-        if (!input.current.validity.valid) {
+        if (!evt.target.validity.valid) {
 
             setFormInputsValid({
                 ...formInputsValid,
@@ -51,7 +45,7 @@ const EditAvatarPopup = (props) => {
 
             setFormValidationMessages({
                 ...formValidationMessages,
-                [name]: input.current.validationMessage
+                [name]: evt.target.validationMessage
             });
 
         } else {
@@ -68,7 +62,7 @@ const EditAvatarPopup = (props) => {
     }
 
     React.useEffect(() => {
-        refAvatar.current.value = "";
+        setAvatar({ avatar: "" });
     }, [props.popupOpen]);
 
     React.useEffect(() => {
@@ -99,7 +93,6 @@ const EditAvatarPopup = (props) => {
                     id="profile-avatar"
                     placeholder="Ссылка на картинку"
                     required
-                    ref={refAvatar}
                     value={avatar.avatar}
                     onChange={handleInputChange}
                 />
