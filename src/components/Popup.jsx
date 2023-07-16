@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 
 const Popup = (props) => {
 
     const { closeHandler, className, children, isOpen } = props;
-    const popup = useRef(null);
 
     // Закрытие по оверлею
     const handleOverlayClose = (evt) => {
@@ -20,10 +19,8 @@ const Popup = (props) => {
     };
 
     useEffect(() => {
-        if (isOpen) {
-            document.addEventListener("click", handleOverlayClose, false);
-            document.addEventListener("keydown", closeByEsc, false);
-        }
+        document.addEventListener("click", handleOverlayClose, false);
+        document.addEventListener("keydown", closeByEsc, false);
 
         return () => {
             if (isOpen) {
@@ -35,7 +32,7 @@ const Popup = (props) => {
     }, [isOpen, closeHandler]);
 
     return (
-        <div className={className} ref={popup}>
+        <div className={className}>
             {children}
         </div>
     );
