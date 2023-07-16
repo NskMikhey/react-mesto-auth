@@ -128,7 +128,7 @@ function App() {
     setIsLoading(true);
     api.removeCard(deleteCard._id)
       .then(() => {
-        setCards(cards.filter((currentCard) => currentCard._id !== deleteCard._id && currentCard));
+        setCards((state) => state.filter((currentCard) => currentCard._id !== deleteCard._id));
         closeAllPopups();
       })
       .catch((err) => console.log(`Ошибка ${err}`))
@@ -184,7 +184,6 @@ function App() {
   function registration(registerData) {
     Auth.register(registerData)
       .then(() => {
-        handleInfoTooltipPopupOpen();
         setInfoTooltipType("reg_success");
         setInfoTooltipOpen(true);
         navigate('/sign-in');
@@ -192,8 +191,10 @@ function App() {
       .catch((err) => {
         handleInfoTooltipPopupOpen();
         setInfoTooltipType("error");
-        setInfoTooltipOpen(true);
         console.log(err)
+      })
+      .finally(() => {
+        handleInfoTooltipPopupOpen();
       });
   }
 
@@ -209,7 +210,6 @@ function App() {
       .catch((err) => {
         handleInfoTooltipPopupOpen();
         setInfoTooltipType("error");
-        setInfoTooltipOpen(true);
         console.log(err);
       })
   }
@@ -225,7 +225,7 @@ function App() {
             setLoggedIn(true);
           }
         })
-        .catch(err => console.log(err));
+        .catch(console.error);
     }
   }
 

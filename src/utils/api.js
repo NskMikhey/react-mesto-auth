@@ -24,10 +24,7 @@ class Api {
     setUserData(userName, userAbout) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
-            headers: {
-                authorization: '438e2072-cb3f-42a1-8236-431af52821e6',
-                'Content-Type': 'application/json',
-            },
+            headers: this._headers,
             body: JSON.stringify({
                 name: userName,
                 about: userAbout

@@ -30,7 +30,6 @@ const EditProfilePopup = (props) => {
     function handleSubmit(evt) {
         evt.preventDefault();
         props.onUpdateUser(userData);
-        setFormInputsValid({ name: true, about: true });
         setFormValidationMessages({ name: "", about: "" });
         setFormValid(true);
     }

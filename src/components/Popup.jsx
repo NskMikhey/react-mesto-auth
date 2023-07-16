@@ -1,8 +1,8 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 
 const Popup = (props) => {
 
-    const {closeHandler, className, children} = props;
+    const { closeHandler, className, children, isOpen } = props;
     const popup = useRef(null);
 
     // Закрытие по оверлею
@@ -20,14 +20,19 @@ const Popup = (props) => {
     };
 
     useEffect(() => {
-        document.addEventListener("click", handleOverlayClose, false);
-        document.addEventListener("mousedown", closeByEsc, false);
+        if (isOpen) {
+            document.addEventListener("click", handleOverlayClose, false);
+            document.addEventListener("keydown", closeByEsc, false);
+        }
 
         return () => {
-            document.removeEventListener("click", handleOverlayClose, false);
-            document.removeEventListener("mousedown", closeByEsc, false);
+            if (isOpen) {
+                document.removeEventListener("click", handleOverlayClose, false);
+                document.removeEventListener("keydown", closeByEsc, false);
+            }
         };
-    });
+        //eslint-disable-next-line
+    }, [isOpen, closeHandler]);
 
     return (
         <div className={className} ref={popup}>

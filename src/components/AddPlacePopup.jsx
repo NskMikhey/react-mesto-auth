@@ -63,12 +63,12 @@ const AddPlacePopup = (props) => {
     function handleSubmit(evt) {
         evt.preventDefault();
         props.onAddPlace(card);
-        setFormInputsValid({ name: false, link: false });
-        setFormValidationMessages({ name: "", link: "" });
-        setFormValid(false);
     }
 
     React.useEffect(() => {
+        setFormInputsValid({ name: false, link: false });
+        setFormValidationMessages({ name: "", link: "" });
+        setFormValid(false);
         setCard({ name: '', link: '' });
     }, [props.popupOpen])
 

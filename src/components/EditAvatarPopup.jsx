@@ -25,12 +25,9 @@ const EditAvatarPopup = (props) => {
 
     function handleSubmit(evt) {
         evt.preventDefault();
-
         props.onUpdateAvatar({
             avatar: refAvatar.current.value
         })
-
-        setFormInputsValid({ avatar: false });
         setFormValid(false);
     }
 
